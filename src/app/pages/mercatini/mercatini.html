@@ -1,0 +1,73 @@
+<h1>Mercatini</h1>
+
+<!-- @if (service.mercatini().length===0) {
+    <p>Caricamento...</p>
+}
+
+@for (m of service.mercatini(); track m.id) {
+    <div class="card">
+        <h3>{{m.titolo}}</h3>
+        <p>{{m.descrizione}}</p>
+        <p>{{m.piazza}}</p>
+        <p>{{m.tema}}</p>
+        <p>{{m.dataOra}}</p>
+        <p>{{m.banchiAssegnati}}/{{m.banchiTotali}}</p>
+    </div>
+} -->
+
+<div>
+    <label for="searchInput">Cerca mercatino</label>
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Cerca titolo..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event); load()"
+    >
+    
+    <label for="temaSelect">Filtra per tema</label>
+    <select 
+        id="temaSelect"
+        [ngModel]="tema()"
+        (ngModelChange)="tema.set($event); load()"
+    >
+        @for (t of temi; track t) {
+            <option [ngValue]="t">
+                {{ t==='' ? 'Tutti i temi' : t }}
+            </option>
+        }
+    </select>
+</div>
+
+@if (service.loading()) {
+  <p>Caricamento...</p>
+}
+@if (service.error() !== '') {
+  <p>{{ service.error() }}</p>
+}
+@if (!service.loading() && service.mercatini().length === 0) {
+  <p>Nessun mercatino trovato</p>
+}
+
+@for (m of service.mercatini(); track m.id) {
+  <div class="card">
+    <h3>{{ m.titolo }}</h3>
+    <p>{{ m.descrizione }}</p>
+    <p>
+      <strong>Piazza:</strong>
+      {{ m.piazza }}
+    </p>
+    <p>
+      <strong>Tema:</strong>
+      {{ m.tema }}
+    </p>
+    <p>
+      <strong>Data:</strong>
+      {{ m.dataOra }}
+    </p>
+    <p>
+      <strong>Banchi:</strong>
+      {{ m.banchiAssegnati }}/{{ m.banchiTotali }}
+    </p>
+  </div>
+}
