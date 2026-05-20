@@ -1,0 +1,14 @@
+@if (mercatino()===null) {
+    <p>Caricamento...</p>
+}
+
+@if (mercatino()!==null) {
+    <div>
+        <h2>{{mercatino()!.titolo}}</h2>
+        <p>{{mercatino()!.descrizione}}</p>
+        <p><b>Piazza:</b>{{mercatino()!.piazza}}</p>
+        <p><b>Tema:</b>{{mercatino()!.tema}}</p>
+        <p><b>Data:</b>{{mercatino()!.dataOra}}</p>
+        <p><b>Banchi:</b>{{mercatino()!.banchiAssegnati}}/{{mercatino()!.banchiTotali}}</p>
+    </div>
+}

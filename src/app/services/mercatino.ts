@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Mercatino } from '../models/mercatino';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ export class MercatinoService {
   mercatini=signal<Mercatino[]>([]);
   loading=signal(false);
   error=signal('');
+  router=inject(Router);
 
   constructor(private http:HttpClient){}
   
@@ -35,5 +37,9 @@ export class MercatinoService {
           this.loading.set(false);
         }
       });
+  }
+
+  getById(id: number){
+    return this.http.get<Mercatino>(`${this.apiUrl}/${id}`)
   }
 }

@@ -1,20 +1,5 @@
 <h1>Mercatini</h1>
 
-<!-- @if (service.mercatini().length===0) {
-    <p>Caricamento...</p>
-}
-
-@for (m of service.mercatini(); track m.id) {
-    <div class="card">
-        <h3>{{m.titolo}}</h3>
-        <p>{{m.descrizione}}</p>
-        <p>{{m.piazza}}</p>
-        <p>{{m.tema}}</p>
-        <p>{{m.dataOra}}</p>
-        <p>{{m.banchiAssegnati}}/{{m.banchiTotali}}</p>
-    </div>
-} -->
-
 <div>
     <label for="searchInput">Cerca mercatino</label>
     <input
@@ -50,7 +35,7 @@
 }
 
 @for (m of service.mercatini(); track m.id) {
-  <div class="card">
+  <div class="card" (click)="goDetail(m.id)">
     <h3>{{ m.titolo }}</h3>
     <p>{{ m.descrizione }}</p>
     <p>
